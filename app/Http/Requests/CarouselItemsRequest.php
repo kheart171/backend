@@ -26,6 +26,7 @@ class CarouselItemsRequest extends FormRequest
             'image_path'        => 'required|max:255',
             'description'       => 'string|nullable|max:255',
             'user_id'           => 'required|integer',
+            'user'              => 'string|max:255',
         ];
     }
 }
