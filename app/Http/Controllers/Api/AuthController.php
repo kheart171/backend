@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,7 @@ class AuthController extends Controller
     {
         
             $user = User::where('email', $request->email)->first();
-        
+         
             if (! $user || ! Hash::check($request->password, $user->password)) {
                 throw ValidationException::withMessages([
                     'email' => ['The provided credentials are incorrect.'],
@@ -33,10 +34,17 @@ class AuthController extends Controller
     }
 
         /**
-     * Logouy using the specified resource.
+     * Logout using the specified resource.
      */
-    public function logout(UserRequest $request)
+    public function logout(Request $request)
     {
-        return false;
+
+        $request->user()->tokens()->delete();
+
+        $response = [
+            'message'   =>  'Logout.'
+        ];
+
+        return $response;
     }
 }
