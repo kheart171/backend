@@ -85,7 +85,7 @@ class UserController extends Controller
         
         $validated = $request->validated();
 
-        $user->password = Hash::make($validated['password']); /**$validated['password']; NOTE: dili ni encrypted ang naka HASH encrypted*/
+        $user->password = Hash::make($validated['password']); /** $validated['password']; NOTE: dili ni encrypted ang naka HASH encrypted*/
          
         $user->save();
 
